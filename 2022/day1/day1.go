@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// Open the text file for reading. Replace "input.txt" with the actual file path.
-	file, err := os.Open("day1.txt")
+	file, err := os.Open("day1/day1.txt")
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
