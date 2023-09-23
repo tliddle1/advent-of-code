@@ -8,10 +8,14 @@ import (
 )
 
 func main() {
+	fmt.Println(part1(), part2())
+}
+
+func part1() int {
 	file, err := os.Open("day3/day3.txt")
 	if err != nil {
 		fmt.Println("Error:", err)
-		return
+		return 0
 	}
 	defer file.Close()
 	reader := bufio.NewReader(file)
@@ -38,7 +42,43 @@ func main() {
 		fmt.Println("Error:", err)
 	}
 	/////////////////////////////
-	fmt.Println(total)
+	return total
+	/////////////////////////////
+}
+
+func part2() int {
+	file, err := os.Open("day3/day3.txt")
+	if err != nil {
+		fmt.Println("Error:", err)
+		return 0
+	}
+	defer file.Close()
+	reader := bufio.NewReader(file)
+	/////////////////////////////
+	total := 0
+	/////////////////////////////
+	for {
+		line1, err := reader.ReadString('\n')
+		line1 = trimSpace(line1)
+		line2, err := reader.ReadString('\n')
+		line2 = trimSpace(line2)
+		line3, err := reader.ReadString('\n')
+		line3 = trimSpace(line3)
+		/////////////////////////////
+
+		c := findCommonCharacters(line1, line2, line3)[0]
+		total += priority(c)
+		/////////////////////////////
+		if err != nil {
+			break
+		} //EOF
+	}
+
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	/////////////////////////////
+	return total
 	/////////////////////////////
 }
 
@@ -67,4 +107,34 @@ func priority(s string) int {
 	} else {
 		return num - 96
 	}
+}
+
+func findCommonCharacters(str1, str2, str3 string) []string {
+	commonChars := []string{}
+
+	// Convert the strings to sets of characters
+	set1 := make(map[rune]struct{})
+	set2 := make(map[rune]struct{})
+	set3 := make(map[rune]struct{})
+
+	for _, char := range str1 {
+		set1[char] = struct{}{}
+	}
+	for _, char := range str2 {
+		set2[char] = struct{}{}
+	}
+	for _, char := range str3 {
+		set3[char] = struct{}{}
+	}
+
+	// Find common characters
+	for char := range set1 {
+		if _, exists2 := set2[char]; exists2 {
+			if _, exists3 := set3[char]; exists3 {
+				commonChars = append(commonChars, string(char))
+			}
+		}
+	}
+
+	return commonChars
 }
