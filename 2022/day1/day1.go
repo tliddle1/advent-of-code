@@ -1,4 +1,4 @@
-package main
+package day1
 
 import (
 	"bufio"
@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-	// Open the text file for reading. Replace "input.txt" with the actual file path.
 	file, err := os.Open("day1/day1.txt")
 	if err != nil {
 		fmt.Println("Error:", err)
@@ -18,15 +17,13 @@ func main() {
 	}
 	defer file.Close()
 
-	// Create a bufio.Reader to read from the file.
 	reader := bufio.NewReader(file)
 
-	// Read and print each line from the file.
 	maxCal := 0
 	curr := 0
 	var calories []int
 	for {
-		line, err := reader.ReadString('\n') // Read until a newline character is encountered.
+		line, err := reader.ReadString('\n')
 		line = trimSpace(line)
 		if num, err := strconv.Atoi(line); err == nil {
 			curr += num
@@ -38,7 +35,7 @@ func main() {
 			fmt.Printf("Not an integer: %v\n", line)
 		}
 		if err != nil {
-			break // Reached end of file
+			break
 		}
 	}
 
@@ -46,10 +43,7 @@ func main() {
 		fmt.Println("Error:", err)
 	}
 
-	// Sort the slice in ascending order.
 	sort.Ints(calories)
-
-	// Find and print the largest three integers.
 	length := len(calories)
 	largestThree := calories[length-3:]
 
@@ -57,7 +51,6 @@ func main() {
 }
 
 func trimSpace(s string) string {
-	// Remove leading and trailing whitespace.
 	return string(bytes.TrimSpace([]byte(s)))
 }
 
