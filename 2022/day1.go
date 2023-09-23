@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"sort"
 	"strconv"
 )
 
@@ -23,6 +24,7 @@ func main() {
 	// Read and print each line from the file.
 	maxCal := 0
 	curr := 0
+	var calories []int
 	for {
 		line, err := reader.ReadString('\n') // Read until a newline character is encountered.
 		line = trimSpace(line)
@@ -30,9 +32,9 @@ func main() {
 			curr += num
 		} else if line == "" {
 			maxCal = max(maxCal, curr)
+			calories = append(calories, curr)
 			curr = 0
 		} else {
-			break
 			fmt.Printf("Not an integer: %v\n", line)
 		}
 		if err != nil {
@@ -43,10 +45,26 @@ func main() {
 	if err != nil {
 		fmt.Println("Error:", err)
 	}
-	fmt.Print(maxCal)
+
+	// Sort the slice in ascending order.
+	sort.Ints(calories)
+
+	// Find and print the largest three integers.
+	length := len(calories)
+	largestThree := calories[length-3:]
+
+	fmt.Print(maxCal, sum(largestThree))
 }
 
 func trimSpace(s string) string {
 	// Remove leading and trailing whitespace.
 	return string(bytes.TrimSpace([]byte(s)))
+}
+
+func sum(nums []int) int {
+	total := 0
+	for _, i := range nums {
+		total += i
+	}
+	return total
 }
