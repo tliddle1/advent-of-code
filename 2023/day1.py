@@ -4,6 +4,8 @@ Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
 Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"""
 
+# Part 1
+
 max_possible = {"green":13,"red":12,"blue":14}
 
 def validGameNumber(line):
@@ -28,5 +30,32 @@ def solve(lines):
     
     return result
 
+lines = inp.split("\n")
+print(solve(lines))
+
+# Part 2
+
+def calculatePowerOfSet(l):
+    least_required = {"green":0,"red":0,"blue":0}
+    
+    rounds = l.split(": ")[1].split("; ")
+    for r in rounds:
+        groups = r.split(", ")
+        for g in groups:
+            num, color = g.split(' ')
+            num = int(num)
+            if num > least_required[color]:
+                least_required[color] = num
+    power = 1
+    for c in least_required.values():
+        power *= c
+    return power
+
+def solve(lines):
+    result = 0
+    for l in lines:
+        result += calculatePowerOfSet(l)
+    return result
+    
 lines = inp.split("\n")
 print(solve(lines))
