@@ -26,9 +26,6 @@ for i in range(len(time)):
     result *= int(sol2-sol1+1)
 print(result)
 
-inp = """Time:      7  15   30
-Distance:  9  40  200"""
-
 import math
 
 lines = inp.split("\n")
