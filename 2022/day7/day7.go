@@ -108,7 +108,9 @@ func (this *Directory) AddFile(name string, size int) {
 
 func (this *Directory) increaseSize(inc int) {
 	this.Size += inc
-	this.ParentDirectory.increaseSize(inc)
+	if this.ParentDirectory != nil {
+		this.ParentDirectory.increaseSize(inc)
+	}
 }
 
 type File struct {
