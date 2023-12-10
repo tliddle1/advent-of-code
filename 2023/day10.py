@@ -147,7 +147,6 @@ def solve(grid):
         for x in range(len(grid[0])):
             if grid[y][x] == 'S':
                 s = (x,y)
-    result = 0
     coords = [s]
     cur_x = s[0]
     cur_y = s[1]
