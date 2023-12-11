@@ -223,27 +223,6 @@ prev = coords[0]
 for c in coords[1:]:
     lines.append([prev, c])
     prev = c
-lc = mc.LineCollection(lines, linewidths=1, color='black')
-fig, ax = plt.subplots(figsize=(10, 10))
-ax.add_collection(lc)
-ax.margins(0.1)
-x = [p[0] for p in interior_points]
-y = [p[1] for p in interior_points]
-ax.scatter(x, y, s=1,color='red')
-x = [p[0] for p in exterior_points]
-y = [p[1] for p in exterior_points]
-ax.scatter(x, y, s=1,color='green')
-fig.show()
-
-"""
-import numpy as np
-from matplotlib import collections  as mc
-
-lines = []
-prev = coords[0]
-for c in coords[1:]:
-    lines.append([prev, c])
-    prev = c
 
 from matplotlib import cm
 
@@ -258,4 +237,3 @@ x = [p[0] for p in interior_points]
 y = [p[1] for p in interior_points]
 ax.scatter(x, y, s=1,color='black')
 fig.show()
-"""
