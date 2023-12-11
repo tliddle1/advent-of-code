@@ -215,7 +215,7 @@ for y in range(n):
 print(len(interior_points))
 
 import numpy as np
-import pylab as pl
+import matplotlib.pyplot as plt
 from matplotlib import collections  as mc
 
 lines = []
@@ -237,7 +237,6 @@ fig.show()
 
 """
 import numpy as np
-import pylab as pl
 from matplotlib import collections  as mc
 
 lines = []
