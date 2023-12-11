@@ -224,7 +224,7 @@ for c in coords[1:]:
     lines.append([prev, c])
     prev = c
 lc = mc.LineCollection(lines, linewidths=1, color='black')
-fig, ax = pl.subplots()
+fig, ax = plt.subplots(figsize=(10, 10))
 ax.add_collection(lc)
 ax.margins(0.1)
 x = [p[0] for p in interior_points]
