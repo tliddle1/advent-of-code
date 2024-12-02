@@ -1,10 +1,13 @@
 package parse
 
-import "strconv"
+import (
+	"log"
+	"strconv"
+)
 
 func CheckError(err error) {
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
 
@@ -19,4 +22,41 @@ func Abs(i int) int {
 		return -i
 	}
 	return i
+}
+
+func AllBetweenAB(nums []int, a, b int) bool {
+	for _, diff := range nums {
+		if diff < a || diff > b {
+			return false
+		}
+	}
+	return true
+}
+
+func AllPositive(nums []int) bool {
+	for _, diff := range nums {
+		if diff < 1 {
+			return false
+		}
+	}
+	return true
+}
+
+func AllNegative(nums []int) bool {
+	for _, diff := range nums {
+		if diff > -1 {
+			return false
+		}
+	}
+	return true
+}
+
+func Remove(numbers []int, idx int) []int {
+	var newNumbers []int
+	for i, n := range numbers {
+		if i != idx {
+			newNumbers = append(newNumbers, n)
+		}
+	}
+	return newNumbers
 }
