@@ -7,56 +7,49 @@ import (
 	"github.com/tliddle1/advent-of-code/2024/parse"
 )
 
-type ParsedLine struct {
-	line string
-}
-
-func parseLine(line string) ParsedLine {
-	return ParsedLine{
-		line: line,
-	}
-}
-
 func part1(filePath string) int {
-	var result int
-
 	file, err := os.Open(filePath)
 	parse.CheckError(err)
 	defer file.Close()
 	scanner := bufio.NewScanner(file)
+	var input []string
 	///////////////////////////////////
 	for scanner.Scan() {
 		line := scanner.Text()
-		parsedLine := parseLine(line)
-		result += parsedLine.operate1()
+		input = append(input, line)
 	}
+	result := solve(input)
 	///////////////////////////////////
 	parse.CheckError(scanner.Err())
 	return result
 }
 
-func (this *ParsedLine) operate1() int {
-	return parse.StringToInt(this.line)
+func solve(input []string) int {
+	var result int
+	for i, line := range input {
+		_ = i
+		result += calculate(line)
+	}
+	return result
+}
+
+func calculate(line string) int {
+	return parse.StringToInt(line)
 }
 
 func part2(filePath string) int {
-	var result int
-
 	file, err := os.Open(filePath)
 	parse.CheckError(err)
 	defer file.Close()
 	scanner := bufio.NewScanner(file)
+	var input []string
 	///////////////////////////////////
 	for scanner.Scan() {
 		line := scanner.Text()
-		parsedLine := parseLine(line)
-		result += parsedLine.operate2()
+		input = append(input, line)
 	}
+	result := solve(input)
 	///////////////////////////////////
 	parse.CheckError(scanner.Err())
 	return result
-}
-
-func (this *ParsedLine) operate2() int {
-	return parse.StringToInt(this.line)
 }
