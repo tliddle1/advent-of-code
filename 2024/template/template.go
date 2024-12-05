@@ -18,10 +18,9 @@ func part1(filePath string) int {
 		line := scanner.Text()
 		input = append(input, line)
 	}
-	result := solve(input)
 	///////////////////////////////////
 	parse.CheckError(scanner.Err())
-	return result
+	return solve(input)
 }
 
 func solve(input []string) int {
@@ -48,8 +47,7 @@ func part2(filePath string) int {
 		line := scanner.Text()
 		input = append(input, line)
 	}
-	result := solve(input)
 	///////////////////////////////////
 	parse.CheckError(scanner.Err())
-	return result
+	return solve(input)
 }
