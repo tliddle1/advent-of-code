@@ -1,9 +1,26 @@
 package parse
 
 import (
+	"bufio"
 	"log"
+	"os"
 	"strconv"
 )
+
+func GetInput(filePath string) []string {
+	file, err := os.Open(filePath)
+	CheckError(err)
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	var input []string
+	///////////////////////////////////
+	for scanner.Scan() {
+		line := scanner.Text()
+		input = append(input, line)
+	}
+	CheckError(scanner.Err())
+	return input
+}
 
 func CheckError(err error) {
 	if err != nil {
