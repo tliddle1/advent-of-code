@@ -10,16 +10,7 @@ func part1(filePath string) int {
 }
 
 func solve1(input []string) int {
-	var result int
-	for i, line := range input {
-		_ = i
-		result += calculate1(line)
-	}
-	return result
-}
-
-func calculate1(line string) int {
-	return parse.StringToInt(line)
+	return 0
 }
 
 func part2(filePath string) int {
@@ -28,14 +19,5 @@ func part2(filePath string) int {
 }
 
 func solve2(input []string) int {
-	var result int
-	for i, line := range input {
-		_ = i
-		result += calculate2(line)
-	}
-	return result
-}
-
-func calculate2(line string) int {
-	return parse.StringToInt(line)
+	return 0
 }
