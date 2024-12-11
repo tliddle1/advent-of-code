@@ -6,18 +6,20 @@ import (
 
 func part1(filePath string) int {
 	input := parse.GetInput(filePath)
-	return solve1(input)
-}
-
-func solve1(input []string) int {
-	return 0
+	var result int
+	for i, line := range input {
+		_ = i
+		result += parse.StringToInt(line)
+	}
+	return result
 }
 
 func part2(filePath string) int {
 	input := parse.GetInput(filePath)
-	return solve2(input)
-}
-
-func solve2(input []string) int {
-	return 0
+	var result int
+	for i, line := range input {
+		_ = i
+		result += parse.StringToInt(line)
+	}
+	return result
 }
