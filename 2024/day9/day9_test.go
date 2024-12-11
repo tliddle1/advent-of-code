@@ -12,7 +12,7 @@ const (
 	expectedPart1Sample = 1928
 	expectedPart1       = 6385338159127
 	expectedPart2Sample = 2858
-	expectedPart2       = 0
+	expectedPart2       = 6415163624282
 )
 
 func TestOriginalAllocation(t *testing.T) {
