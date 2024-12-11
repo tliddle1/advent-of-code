@@ -77,3 +77,12 @@ func Remove(numbers []int, idx int) []int {
 	}
 	return newNumbers
 }
+
+func RemoveLeadingZeros(s string) string {
+	for i := range s {
+		if s[i] != '0' {
+			return s[i:]
+		}
+	}
+	return "0"
+}
