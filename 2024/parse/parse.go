@@ -86,3 +86,11 @@ func RemoveLeadingZeros(s string) string {
 	}
 	return "0"
 }
+
+func IntPow(a int, b int) int {
+	result := 1
+	for range b {
+		result *= a
+	}
+	return result
+}
