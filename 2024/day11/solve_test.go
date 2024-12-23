@@ -5,10 +5,9 @@ import (
 )
 
 const (
-	expectedPart1Sample = 0
-	expectedPart1       = 0
-	expectedPart2Sample = 0
-	expectedPart2       = 0
+	expectedPart1Sample = 55312
+	expectedPart1       = 207683
+	expectedPart2       = 244782991106220
 )
 
 func TestPart1Sample(t *testing.T) {
@@ -22,14 +21,6 @@ func TestPart1Sample(t *testing.T) {
 func TestPart1(t *testing.T) {
 	expectedResult := expectedPart1
 	result := part1("input.txt")
-	if result != expectedResult {
-		t.Errorf("Expected %v, got %v", expectedResult, result)
-	}
-}
-
-func TestPart2Sample(t *testing.T) {
-	expectedResult := expectedPart2Sample
-	result := part2("sample_input.txt")
 	if result != expectedResult {
 		t.Errorf("Expected %v, got %v", expectedResult, result)
 	}
