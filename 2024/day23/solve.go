@@ -23,19 +23,7 @@ func part1(filePath string) int {
 			result = append(result, numLANs(comp, connectedComp, connections)...)
 		}
 	}
-	return len(removeDuplicates(result))
-}
-
-func removeDuplicates(objs []string) []string {
-	var newObjs []string
-	for _, obj := range objs {
-		if slices.Contains(newObjs, obj) {
-			continue
-		} else {
-			newObjs = append(newObjs, obj)
-		}
-	}
-	return newObjs
+	return len(parse.RemoveDuplicates(result))
 }
 
 func numLANs(comp string, connectedComps []string, connections map[string][]string) []string {

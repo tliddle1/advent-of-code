@@ -2,7 +2,6 @@ package day15
 
 import (
 	"fmt"
-	"slices"
 	"strings"
 
 	"github.com/tliddle1/advent-of-code/2024/parse"
@@ -133,7 +132,7 @@ func part2(filePath string) int {
 		} else {
 			boxes, canPush := canPushBoxInFrontOfMe(room, robotY, robotX, dir)
 			if canPush {
-				boxes = removeDuplicates(boxes)
+				boxes = parse.RemoveDuplicates[[2]int](boxes)
 				for _, box := range boxes {
 					room[box[0]+direction[0]][box[1]+direction[1]] = room[box[0]][box[1]]
 					room[box[0]][box[1]] = "."
@@ -155,16 +154,6 @@ func part2(filePath string) int {
 		}
 	}
 	return result
-}
-
-func removeDuplicates(boxes [][2]int) [][2]int {
-	var seen [][2]int
-	for _, box := range boxes {
-		if !slices.Contains(seen, box) {
-			seen = append(seen, box)
-		}
-	}
-	return seen
 }
 
 func canPushBoxInFrontOfMe(room Room, y int, x int, dir string) ([][2]int, bool) {

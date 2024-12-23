@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"slices"
 	"strconv"
 )
 
@@ -93,4 +94,16 @@ func IntPow(a int, b int) int {
 		result *= a
 	}
 	return result
+}
+
+func RemoveDuplicates[T comparable](objs []T) []T {
+	var newObjs []T
+	for _, obj := range objs {
+		if slices.Contains(newObjs, obj) {
+			continue
+		} else {
+			newObjs = append(newObjs, obj)
+		}
+	}
+	return newObjs
 }

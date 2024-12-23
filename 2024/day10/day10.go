@@ -1,7 +1,6 @@
 package day10
 
 import (
-	"slices"
 	"strings"
 
 	"github.com/tliddle1/advent-of-code/2024/parse"
@@ -49,7 +48,7 @@ func solve1(grid Grid) int {
 	return result
 }
 func countTrailPeaks(coordinate Coordinate, grid Grid) int {
-	return len(removeDuplicates(getTrailPeaks(coordinate, grid)))
+	return len(parse.RemoveDuplicates[Coordinate](getTrailPeaks(coordinate, grid)))
 }
 
 func getTrailPeaks(coordinate Coordinate, grid Grid) []Coordinate {
@@ -80,18 +79,6 @@ func getTrailPeaks(coordinate Coordinate, grid Grid) []Coordinate {
 		trailPeaks = append(trailPeaks, getTrailPeaks(nextCoordinate, grid)...)
 	}
 	return trailPeaks
-}
-
-func removeDuplicates(peaks []Coordinate) []Coordinate {
-	var newPeaks []Coordinate
-	for _, peak := range peaks {
-		if slices.Contains(newPeaks, peak) {
-			continue
-		} else {
-			newPeaks = append(newPeaks, peak)
-		}
-	}
-	return newPeaks
 }
 
 func part2(filePath string) int {

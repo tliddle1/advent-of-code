@@ -8,7 +8,7 @@ const (
 	expectedPart1Sample = 10092
 	expectedPart1       = 1527563
 	expectedPart2Sample = 9021
-	expectedPart2       = 0
+	expectedPart2       = 1521635
 )
 
 func TestPart1Sample(t *testing.T) {
