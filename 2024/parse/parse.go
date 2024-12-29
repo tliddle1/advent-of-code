@@ -88,10 +88,10 @@ func RemoveLeadingZeros(s string) string {
 	return "0"
 }
 
-func IntPow(a int, b int) int {
+func IntPow(base int, exponent int) int {
 	result := 1
-	for range b {
-		result *= a
+	for range exponent {
+		result *= base
 	}
 	return result
 }
