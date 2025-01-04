@@ -1,4 +1,4 @@
-package template
+package day24
 
 import (
 	"testing"
@@ -6,7 +6,7 @@ import (
 
 const (
 	expectedPart1Sample = 2024
-	expectedPart1       = 0
+	expectedPart1       = 49520947122770
 	expectedPart2Sample = 0
 	expectedPart2       = 0
 )

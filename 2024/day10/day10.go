@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/tliddle1/advent-of-code/2024/parse"
+	"github.com/tliddle1/advent-of-code/2024/slice"
 )
 
 type Grid [][]int
@@ -48,7 +49,7 @@ func solve1(grid Grid) int {
 	return result
 }
 func countTrailPeaks(coordinate Coordinate, grid Grid) int {
-	return len(parse.RemoveDuplicates[Coordinate](getTrailPeaks(coordinate, grid)))
+	return len(slice.RemoveDuplicates[Coordinate](getTrailPeaks(coordinate, grid)))
 }
 
 func getTrailPeaks(coordinate Coordinate, grid Grid) []Coordinate {

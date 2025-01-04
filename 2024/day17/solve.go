@@ -1,7 +1,6 @@
 package day17
 
 import (
-	"fmt"
 	"strconv"
 	"strings"
 
@@ -39,28 +38,28 @@ func execute(program []string) string {
 		operand := program[InstructionPointer+1]
 		switch opCode {
 		case "0":
-			fmt.Println("adv")
+			//fmt.Println("adv")
 			adv(operand)
 		case "1":
-			fmt.Println("bxl")
+			//fmt.Println("bxl")
 			bxl(operand)
 		case "2":
-			fmt.Println("bst")
+			//fmt.Println("bst")
 			bst(operand)
 		case "3":
-			fmt.Println("jnz")
+			//fmt.Println("jnz")
 			jnz(operand)
 		case "4":
-			fmt.Println("bxc")
+			//fmt.Println("bxc")
 			bxc(operand)
 		case "5":
-			fmt.Println("out")
+			//fmt.Println("out")
 			result += strconv.Itoa(out(operand))
 		case "6":
-			fmt.Println("bdv")
+			//fmt.Println("bdv")
 			bdv(operand)
 		case "7":
-			fmt.Println("cdv")
+			//fmt.Println("cdv")
 			cdv(operand)
 		default:
 			panic("invalid instruction")

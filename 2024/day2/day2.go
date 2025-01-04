@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/tliddle1/advent-of-code/2024/parse"
+	"github.com/tliddle1/advent-of-code/2024/slice"
 )
 
 type ParsedLine struct {
@@ -88,7 +89,7 @@ func (this *ParsedLine) operate2() int {
 		return 1
 	}
 	for i := range this.numbers {
-		if safe(parse.Remove(this.numbers, i)) {
+		if safe(slice.Remove(this.numbers, i)) {
 			return 1
 		}
 	}

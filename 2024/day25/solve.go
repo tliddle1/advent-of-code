@@ -1,4 +1,4 @@
-package template
+package day25
 
 import (
 	"strings"

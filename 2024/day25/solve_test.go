@@ -1,4 +1,4 @@
-package template
+package day25
 
 import (
 	"testing"
@@ -6,7 +6,7 @@ import (
 
 const (
 	expectedPart1Sample = 3
-	expectedPart1       = 0
+	expectedPart1       = 3356
 	expectedPart2Sample = 0
 	expectedPart2       = 0
 )

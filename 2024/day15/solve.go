@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/tliddle1/advent-of-code/2024/parse"
+	"github.com/tliddle1/advent-of-code/2024/slice"
 )
 
 type Room [][]string
@@ -132,7 +133,7 @@ func part2(filePath string) int {
 		} else {
 			boxes, canPush := canPushBoxInFrontOfMe(room, robotY, robotX, dir)
 			if canPush {
-				boxes = parse.RemoveDuplicates[[2]int](boxes)
+				boxes = slice.RemoveDuplicates[[2]int](boxes)
 				for _, box := range boxes {
 					room[box[0]+direction[0]][box[1]+direction[1]] = room[box[0]][box[1]]
 					room[box[0]][box[1]] = "."

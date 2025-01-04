@@ -33,7 +33,7 @@ func part1(filePath string) int {
 	sort.Ints(side1)
 	sort.Ints(side2)
 	for i := range len(side1) {
-		result += parse.Abs(side1[i] - side2[i])
+		result += parse.IntAbs(side1[i] - side2[i])
 	}
 	///////////////////////////////////
 	parse.CheckError(scanner.Err())

@@ -1,4 +1,4 @@
-package template
+package day23
 
 import (
 	"slices"
@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/tliddle1/advent-of-code/2024/parse"
+	"github.com/tliddle1/advent-of-code/2024/slice"
 )
 
 func part1(filePath string) int {
@@ -23,7 +24,7 @@ func part1(filePath string) int {
 			result = append(result, numLANs(comp, connectedComp, connections)...)
 		}
 	}
-	return len(parse.RemoveDuplicates(result))
+	return len(slice.RemoveDuplicates(result))
 }
 
 func numLANs(comp string, connectedComps []string, connections map[string][]string) []string {

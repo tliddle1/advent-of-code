@@ -127,7 +127,7 @@ func part2(filePath string, wide, tall int) int {
 
 		}
 		if hasTree(coordinates, wide, tall) {
-			printRoom(tall, wide, coordinates)
+			//printRoom(tall, wide, coordinates)
 			return iterations
 		}
 

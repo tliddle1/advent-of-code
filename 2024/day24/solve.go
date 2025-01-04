@@ -1,7 +1,6 @@
-package template
+package day24
 
 import (
-	"fmt"
 	"slices"
 	"sort"
 	"strconv"
@@ -111,28 +110,5 @@ func logicGate(value1 int, value2 int, operation string) int {
 }
 
 func part2(filePath string) int {
-	input := parse.GetInput(filePath)
-	var gates []Gate
-	outputs := make(map[string]string)
-	gates = getGates(input)
-	for _, gate := range gates {
-		outputs[gate.output] = "(" + gate.input1 + " " + gate.operation + " " + gate.input2 + ")"
-	}
-	replacementOccurred := true
-	for replacementOccurred {
-		replacementOccurred = false
-		for _, gate := range gates {
-			for output, value := range outputs {
-				if strings.Contains(outputs[gate.output], output) {
-					replacementOccurred = true
-					outputs[gate.output] = strings.Replace(outputs[gate.output], output, value, 1)
-				}
-			}
-			outputs[gate.output] = "(" + gate.output + ")"
-		}
-	}
-	for output, value := range outputs {
-		fmt.Println(output, value)
-	}
 	return 0
 }
