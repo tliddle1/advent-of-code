@@ -1,132 +1,46 @@
 package day4
 
 import (
-	"bufio"
-	"os"
 	"strings"
 
 	"github.com/tliddle1/advent-of-code/2024/parse"
+	"github.com/tliddle1/advent-of-code/2024/spatial"
 )
 
-func part1(filePath string) int {
-	file, err := os.Open(filePath)
-	parse.CheckError(err)
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-	var input []string
-	///////////////////////////////////
-	for scanner.Scan() {
-		line := scanner.Text()
-		input = append(input, line)
+func makeGrid(input []string) spatial.Grid[string] {
+	var grid spatial.Grid[string]
+	for _, row := range input {
+		grid = append(grid, strings.Split(row, ""))
 	}
-	result := solve(input)
-	///////////////////////////////////
-	parse.CheckError(scanner.Err())
-	return result
+	return grid
 }
 
-func solve(input []string) int {
+func part1(filePath string) int {
+	input := parse.GetInput(filePath)
+	g := makeGrid(input)
+
 	var result int
-	var grid [][]string
-	for _, line := range input {
-		grid = append(grid, strings.Split(line, ""))
-	}
-	for i := range grid {
-		for j := range grid[i] {
-			if grid[i][j] == "X" {
-				result += count(i, j, grid)
+	for y := range g.N() {
+		for x := range g.M() {
+			pos := spatial.Pos{x, y}
+			if g.Get(pos) == "X" {
+				result += countXMAS(pos, g)
 			}
 		}
 	}
 	return result
 }
 
-func count(i int, j int, grid [][]string) int {
-	var result int
-	for d := range 8 {
-		if getWord(i, j, grid, d) == "XMAS" {
-			result++
-		}
-	}
-	return result
-}
-
-const (
-	n = iota
-	ne
-	e
-	se
-	s
-	sw
-	w
-	nw
-)
-
-func getWord(i, j int, grid [][]string, d int) string {
-	switch d {
-	case n:
-		if i >= 3 {
-			return grid[i][j] + grid[i-1][j] + grid[i-2][j] + grid[i-3][j]
-		}
-	case ne:
-		if i >= 3 && j < len(grid[i])-3 {
-			return grid[i][j] + grid[i-1][j+1] + grid[i-2][j+2] + grid[i-3][j+3]
-		}
-	case e:
-		if j < len(grid[i])-3 {
-			return grid[i][j] + grid[i][j+1] + grid[i][j+2] + grid[i][j+3]
-		}
-	case se:
-		if i < len(grid)-3 && j < len(grid[i])-3 {
-			return grid[i][j] + grid[i+1][j+1] + grid[i+2][j+2] + grid[i+3][j+3]
-		}
-	case s:
-		if i < len(grid)-3 {
-			return grid[i][j] + grid[i+1][j] + grid[i+2][j] + grid[i+3][j]
-		}
-	case sw:
-		if i < len(grid)-3 && j >= 3 {
-			return grid[i][j] + grid[i+1][j-1] + grid[i+2][j-2] + grid[i+3][j-3]
-		}
-	case w:
-		if j >= 3 {
-			return grid[i][j] + grid[i][j-1] + grid[i][j-2] + grid[i][j-3]
-		}
-	case nw:
-		if i >= 3 && j >= 3 {
-			return grid[i][j] + grid[i-1][j-1] + grid[i-2][j-2] + grid[i-3][j-3]
-		}
-	}
-	return ""
-}
-
 func part2(filePath string) int {
-	file, err := os.Open(filePath)
-	parse.CheckError(err)
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-	var input []string
-	///////////////////////////////////
-	for scanner.Scan() {
-		line := scanner.Text()
-		input = append(input, line)
-	}
-	result := solve2(input)
-	///////////////////////////////////
-	parse.CheckError(scanner.Err())
-	return result
-}
+	input := parse.GetInput(filePath)
+	grid := makeGrid(input)
 
-func solve2(input []string) int {
 	var result int
-	var grid [][]string
-	for _, line := range input {
-		grid = append(grid, strings.Split(line, ""))
-	}
-	for i := range grid {
-		for j := range grid[i] {
-			if grid[i][j] == "A" {
-				if xmas(i, j, grid) {
+	for y := range grid.N() {
+		for x := range grid.M() {
+			pos := spatial.Pos{x, y}
+			if grid.Get(pos) == "A" {
+				if xmas(pos, grid) {
 					result++
 				}
 			}
@@ -135,18 +49,36 @@ func solve2(input []string) int {
 	return result
 }
 
-func xmas(i int, j int, grid [][]string) bool {
-	if i == 0 || j == 0 || i == len(grid)-1 || j == len(grid[0])-1 {
+func countXMAS(pos spatial.Pos, g spatial.Grid[string]) int {
+	var result int
+	for d := range 8 {
+		dir := spatial.Dir(d)
+		if getWord(g, pos, dir, 4) == "XMAS" {
+			result++
+		}
+	}
+	return result
+}
+
+func getWord(g spatial.Grid[string], pos spatial.Pos, dir spatial.Dir, length int) string {
+	if !g.Contains(pos.Move(dir, 3)) {
+		return ""
+	}
+	var word string
+	for i := range length {
+		word += g.Get(pos.Move(dir, i))
+	}
+	return word
+}
+
+func xmas(pos spatial.Pos, grid spatial.Grid[string]) bool {
+	if grid.OnEdge(pos) {
 		return false
 	}
-	//SE
-	SE := grid[i+1][j+1]
-	//NW
-	NW := grid[i-1][j-1]
-	//SW
-	SW := grid[i+1][j-1]
-	//NE
-	NE := grid[i-1][j+1]
+	SE := grid.Get(pos.Move(spatial.SE, 1))
+	NW := grid.Get(pos.Move(spatial.NW, 1))
+	SW := grid.Get(pos.Move(spatial.SW, 1))
+	NE := grid.Get(pos.Move(spatial.NE, 1))
 	cross1 := (SE == "M" && NW == "S") || (SE == "S" && NW == "M")
 	cross2 := (SW == "M" && NE == "S") || (SW == "S" && NE == "M")
 	return cross1 && cross2
